@@ -1,0 +1,52 @@
+!pip install datapackage
+!pip install pandas
+!pip install numpy
+!pip install yahoo-finance
+!pip install matplotlib
+
+import pandas as pd
+import datetime
+import numpy as np
+import matplotlib.pyplot as plt
+from pandas.plotting import scatter_matrix
+import yfinance as yf
+
+startDate = '2021-06-01'
+endDate = '2021-11-19'
+
+Tesla = yf.download('TSLA',startDate,endDate)
+Apple = yf.download('AAPL',startDate,endDate)
+Microsoft = yf.download('MSFT',startDate,endDate)
+Google = yf.download('GOOG',startDate,endDate)
+Amazon = yf.download('AMZN',startDate,endDate)
+Meta = yf.download('FB',startDate,endDate)
+Nvidia = yf.download('NVDA',startDate,endDate)
+Tencent = yf.download('TCEHY',startDate,endDate)
+Visa = yf.download('V',startDate,endDate)
+HomeDepot = yf.download('HD',startDate,endDate)
+
+TeslaADG = (-1*np.mean(Tesla['Open']-Tesla['Close']),'Tesla')
+AppleADG = (-1*np.mean(Apple['Open']-Apple['Close']),'Apple')
+MicrosoftADG = (-1*np.mean(Microsoft['Open']-Microsoft['Close']),'Microsoft')
+GoogleADG = (-1*np.mean(Google['Open']-Google['Close']),'Google')
+AmazonADG = (-1*np.mean(Amazon['Open']-Amazon['Close']),'Amazon')
+MetaADG = (-1*np.mean(Meta['Open']-Meta['Close']),'Meta')
+NvidiaADG = (-1*np.mean(Nvidia['Open']-Nvidia['Close']),'Nvidia')
+TencentADG = (-1*np.mean(Tencent['Open']-Tencent['Close']),'Tencent')
+VisaADG = (-1*np.mean(Visa['Open']-Visa['Close']),'Visa')
+HomeDepotADG = (-1*np.mean(HomeDepot['Open']-HomeDepot['Close']),'HomeDepot')
+
+print('Tesla:', TeslaADG)
+print('Apple:', AppleADG)
+print('Microsoft:', MicrosoftADG)
+print('Google', GoogleADG)
+print('Amazon:', AmazonADG)
+print('Meta:', MetaADG)
+print('Nvidia:', NvidiaADG)
+print('Tencent:', TencentADG)
+print('Visa:', VisaADG)
+print('HomeDepot:', HomeDepotADG)
+
+DailyAverageArray = ([TeslaADG,AppleADG,MicrosoftADG,GoogleADG,AmazonADG,MetaADG,NvidiaADG,TencentADG,VisaADG,HomeDepotADG])
+DailyAverageArray.sort()
+print(DailyAverageArray)
